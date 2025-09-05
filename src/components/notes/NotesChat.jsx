@@ -1,32 +1,32 @@
-import { useState } from "react";
-import api from "../../services/api";
-import { Link } from "react-router-dom";
+import { useState } from "react"
+import api from "../../services/api"
+import { Link } from "react-router-dom"
 
 const NotesChat = ({ userId }) => {
-  const [question, setQuestion] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [answer, setAnswer] = useState("");
-  const [error, setError] = useState("");
+  const [question, setQuestion] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [answer, setAnswer] = useState("")
+  const [error, setError] = useState("")
 
   const handleAskQuestion = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setAnswer("");
+    e.preventDefault()
+    setLoading(true)
+    setError("")
+    setAnswer("")
 
     try {
       // Send the question to the backend
       const response = await api.post(`/mongo/answer-question/${userId}`, {
         question,
-      });
-      setAnswer(response.data.answer || "No answer available.");
+      })
+      setAnswer(response.data.answer || "No answer available.")
     } catch (err) {
-      console.error("Error answering question:", err);
-      setError("Failed to get an answer. Please try again.");
+      console.error("Error answering question:", err)
+      setError("Failed to get an answer. Please try again.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="bg-white border-4 border-black rounded-2xl p-8 shadow-[6px_6px_0_0_#000] my-10">
@@ -64,7 +64,7 @@ const NotesChat = ({ userId }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default NotesChat;
+export default NotesChat
